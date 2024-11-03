@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huellita Chalaca</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Enlace de Bootstrap para el carrusel -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+		<div class="logo">
+            <img src="logo.png" alt="La Huellita Chalaca">
+            <h1>La Huellita Chalaca</h1>
+        </div>
+            <ul>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#talleres">Talleres</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#trabajo">Trabaja con Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+				<a href="inicio_sesion.html" class="login-button">Iniciar Sesión</a>
+            </ul>
+           </nav>
+    </header>
+
+    <section class="hero">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+					<a href="https://www.facebook.com/photo?fbid=514399401357321&set=a.124216510375614">
+                    <img src="pet1.jpg" class="w-100" alt="Mascota 1">
+                </div>
+                <div class="carousel-item">
+					<a href="https://www.facebook.com/photo?fbid=514399401357321&set=a.124216510375614">
+                    <img src="pet2.jpg" class="w-100" alt="Mascota 2">
+                </div>
+				<div class="carousel-item">
+					<a href="https://www.facebook.com/photo?fbid=514399401357321&set=a.124216510375614">
+                    <img src="pet3.jpg" class="w-100" alt="Mascota 3">
+                </div>
+				<div class="carousel-item">
+					<a href="https://www.facebook.com/photo?fbid=514399401357321&set=a.124216510375614">
+                    <img src="pet4.jpg" class="w-100" alt="Mascota 4">
+                </div>
+                
+            </div>
+            <!-- Controles de navegación -->
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="address-info">
+            <h2>Ubicación</h2>
+            <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+                <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div>
+                <script>
+                    (function () {
+                        var setting = {"query":"Avenida Los Dominicos 185, Callao, Perú","width":400,"height":200,"satellite":false,"zoom":16,"placeId":"ChIJ06TFcJvOBZERzbyVPyYE4aM","cid":"0xa3e104263f95bccd","coords":[-12.0126412,-77.0959158],"cityUrl":"/peru/lima","cityAnchorText":"Map of Lima, Provincia de Lima, Peru","lang":"es-es","queryString":"Avenida Los Dominicos 185, Callao, Perú","centerCoord":[-12.0126412,-77.0959158],"id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"1164376"};
+                        var d = document;
+                        var s = d.createElement('script');
+                        s.src = 'https://1map.com/js/script-for-user.js?embed_id=1164376';
+                        s.async = true;
+                        s.onload = function (e) {
+                            window.OneMap.initMap(setting)
+                        };
+                        var to = d.getElementsByTagName('script')[0];
+                        to.parentNode.insertBefore(s, to);
+                    })();
+                </script>
+                <a href="https://1map.com/es-es/map-embed">1 Map</a>
+            </div>
+            <p>Av. Los Dominicos 185, Callao 07036</p>
+        </div>
+        <div class="social-media">
+            <h2>Redes Sociales</h2>
+            <p>Síguenos en nuestras redes sociales:</p>
+            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+        </div>
+        <div class="contact-info">
+            <h2>Correo</h2>
+            <p>contacto@lahuellitachalaca.com</p>
+        </div>
+    </section>
+
+    <footer>
+        <img src="doge-icon.png" alt="Doge Icon" class="doge-icon"> 
+		<p>"No nos pagan lo suficiente para lidiar con dueños histéricos, pero lo hacemos por los peludos."</p>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
