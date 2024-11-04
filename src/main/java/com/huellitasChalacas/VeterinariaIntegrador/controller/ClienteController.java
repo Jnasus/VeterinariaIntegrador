@@ -4,6 +4,7 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.controller;
 
+import com.huellitasChalacas.VeterinariaIntegrador.dto.ClienteDTO;
 import com.huellitasChalacas.VeterinariaIntegrador.model.Cliente;
 import com.huellitasChalacas.VeterinariaIntegrador.service.ClienteService;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,14 +28,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/cliente")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteService clienteService;
     
-     @GetMapping
-    public ResponseEntity<List<Cliente>> getAllClientes() {
-        List<Cliente> cliente = clienteService.findAll();
+    
+
+    @GetMapping
+    public ResponseEntity<List<ClienteDTO>> getAllClientes() {
+        List<ClienteDTO> cliente = clienteService.findAll();
         return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<ClienteDTO>> searchClientes(@RequestParam String nombre) {
+        List<ClienteDTO> clientes = clienteService.searchClientesByName(nombre);
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
     // Obtener una categoría por ID

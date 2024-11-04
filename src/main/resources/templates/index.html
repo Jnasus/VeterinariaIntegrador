@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Huellita Chalaca - Inicio</title>
+        <link rel="stylesheet" href="/css/index.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- Fragmento Header -->
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+
+    <!-- Sección carrusel -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img th:src="@{/img/inicio1.jpg}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/img/inicio2.jpg}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/img/inicio3.jpg}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/img/inicio4.jpg}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Bienvenida con Reseñas, Visión y Misión -->
+    <section id="about" style="padding: 2rem; text-align: center; background-color: #f9f9f9;">
+        <h2>Sobre Nosotros</h2>
+        <p>En Huellita Chalaca, cuidamos a tus mascotas con amor y profesionalismo.</p>
+        <!-- Visión y Misión -->
+        <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem;">
+            <div style="max-width: 300px;">
+                <h3>Nuestra Visión</h3>
+                <p>Ser el centro veterinario líder en la región, promoviendo el bienestar animal a través de servicios de alta calidad.</p>
+            </div>
+            <div style="max-width: 300px;">
+                <h3>Nuestra Misión</h3>
+                <p>Brindar atención integral y profesional a las mascotas, fomentando la salud y felicidad en cada familia que atendemos.</p>
+            </div>
+        </div>
+
+        <!-- Sección de Reseñas -->
+        <div style="margin-top: 2rem;">
+            <h3>Lo que Dicen Nuestros Clientes</h3>
+            <div class="reviews" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <div class="review-card" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; max-width: 250px;">
+                    <p>"Excelente servicio y trato amable. Mis mascotas siempre reciben la mejor atención." - María S.</p>
+                </div>
+                <div class="review-card" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; max-width: 250px;">
+                    <p>"Recomiendo Huellita Chalaca por su profesionalismo y compromiso con el bienestar animal." - Carlos M.</p>
+                </div>
+                <div class="review-card" style="background-color: #ffffff; padding: 1rem; border-radius: 8px; max-width: 250px;">
+                    <p>"Un lugar confiable para llevar a nuestras mascotas. ¡Siempre estamos tranquilos aquí!" - Sofía P.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Fotos de Mascotas -->
+    <section id="gallery" style="padding: 2rem; text-align: center; background-color: #e6f7ff;">
+        <h2>Nuestras Mascotas</h2>
+        <p>Algunas de las lindas mascotas que hemos tenido el placer de cuidar.</p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <img th:src="@{/img/inicio1.jpg}" alt="Mascota 1" style="width: 150px; height: auto; border-radius: 8px;">
+            <img th:src="@{/img/inicio2.jpg}" alt="Mascota 2" style="width: 150px; height: auto; border-radius: 8px;">
+            <img th:src="@{/img/inicio3.jpg}" alt="Mascota 3" style="width: 150px; height: auto; border-radius: 8px;">
+            <img th:src="@{/img/inicio4.jpg}" alt="Mascota 4" style="width: 150px; height: auto; border-radius: 8px;">
+        </div>
+    </section>
+
+
+    <!-- Fragmento Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

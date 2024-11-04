@@ -4,9 +4,11 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.service;
 
+import com.huellitasChalacas.VeterinariaIntegrador.dto.ClienteDTO;
 import com.huellitasChalacas.VeterinariaIntegrador.model.Cliente;
 import com.huellitasChalacas.VeterinariaIntegrador.repository.ClienteRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,10 @@ public class ClienteService implements IClienteService {
     private ClienteRepository clienteRepository;
 
     @Override
-    public List<Cliente> findAll() {
+    public List<ClienteDTO> findAll() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return clienteRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes.stream().map(this::convertirAClienteDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -42,6 +45,32 @@ public class ClienteService implements IClienteService {
     public void deleteById(Integer id) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         clienteRepository.deleteById(id);
+    }
+
+    // Método para convertir Cliente a ClienteDTO
+    public ClienteDTO convertirAClienteDTO(Cliente cliente) {
+        String nombreTipoDoc = cliente.getTipoDoc() != null ? cliente.getTipoDoc().getNombre() : null;
+
+        return new ClienteDTO(
+                cliente.getIdPersona(),
+                cliente.getNombres(),
+                cliente.getAPaterno(),
+                cliente.getAMaterno(),
+                cliente.getSexo(),
+                cliente.getFechNacimiento(),
+                cliente.getDireccion(),
+                cliente.getCelular(),
+                cliente.getCorreo(),
+                cliente.getDocId(),
+                nombreTipoDoc
+        );
+    }
+
+    @Override
+    public List<ClienteDTO> searchClientesByName(String nombre) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Cliente> clientes = clienteRepository.findByNombresContainingIgnoreCase(nombre);
+        return clientes.stream().map(this::convertirAClienteDTO).collect(Collectors.toList());
     }
 
 }

@@ -66,11 +66,11 @@
             <scope>test</scope>
         </dependency>
 
+        
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>     
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId> <!-- Cambiado a starter de Thymeleaf -->
+        </dependency> 
 
     </dependencies>
 

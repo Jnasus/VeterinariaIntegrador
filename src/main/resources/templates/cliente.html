@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mantenimiento de Clientes</title>
+        <link rel="stylesheet" href="/css/index.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <style>
+            .table-striped tbody tr:nth-of-type(odd) {
+                background-color: #f9f9f9;
+            }
+            .rounded {
+                border-radius: 8px;
+            }
+        </style>    
+    </head>
+    <body>
+        <!-- Fragmento Header -->
+    <th:block th:replace="fragments/header :: header"></th:block>
+
+    <div class="container mt-5">
+        <h2 class="mb-4 text-success">Mantenimiento de Clientes</h2>
+
+        <!-- Barra de búsqueda -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Buscar por nombre" id="searchName">
+            <button class="btn btn-success" onclick="buscarCliente()">Buscar</button>
+        </div>
+
+        <!-- Tabla de Clientes -->
+        <table class="table table-striped rounded">
+            <thead class="table-success">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Documento</th>
+                    <th>Tipo Documento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="clientesTableBody">
+                <!-- Aquí se cargarán los datos dinámicamente -->
+            </tbody>
+        </table>
+
+        <!-- Botón de Guardar -->
+        <button class="btn btn-success mt-3" onclick="abrirModal()">Guardar Nuevo Cliente</button>
+
+        <!-- Modal para Guardar/Editar Cliente -->
+        <div class="modal fade" id="clienteModal" tabindex="-1" aria-labelledby="clienteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-success" id="clienteModalLabel">Cliente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="clienteForm">
+                            <input type="hidden" id="clienteId">
+                            <div class="mb-3">
+                                <label for="nombres" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="nombres" required>
+                            </div>
+                            <!-- Campos adicionales (Apellido Paterno, Materno, etc.) -->
+                            <div class="mb-3">
+                                <label for="tipoDoc" class="form-label">Tipo de Documento</label>
+                                <select class="form-select" id="tipoDoc">
+                                    <!-- Opciones cargadas dinámicamente -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="docId" class="form-label">Documento de Identidad</label>
+                                <input type="text" class="form-control" id="docId" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" onclick="guardarCliente()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funciones de JavaScript para buscar, cargar y manipular los datos
+        function buscarCliente() {
+            const nombre = document.getElementById('searchName').value;
+            fetch(`/api/v1/cliente/buscar?nombre=${nombre}`)
+                    .then(response => response.json())
+                    .then(data => cargarTablaClientes(data))
+                    .catch(error => console.error('Error:', error));
+        }
+
+        function cargarTablaClientes(clientes) {
+            const tableBody = document.getElementById('clientesTableBody');
+            tableBody.innerHTML = '';
+            clientes.forEach(cliente => {
+                const row = `<tr>
+                                <td>${cliente.nombres}</td>
+                                <td>${cliente.aPaterno}</td>
+                                <td>${cliente.aMaterno}</td>
+                                <td>${cliente.docId}</td>
+                                <td>${cliente.tipoDocNombre}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" onclick="abrirModal(${cliente.idPersona})">Editar</button>
+                                    <button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.idPersona})">Eliminar</button>
+                                </td>
+                             </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function abrirModal(id = null) {
+            // Implementación para abrir modal de edición o nuevo cliente
+            const modal = new bootstrap.Modal(document.getElementById('clienteModal'));
+            modal.show();
+        }
+
+        function guardarCliente() {
+            // Implementación de la función para guardar cliente
+        }
+
+        function eliminarCliente(id) {
+            // Implementación de la función para eliminar cliente
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Fragmento Footer -->
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>
