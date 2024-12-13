@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,11 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/especialidad")
 public class EspecialidadController {
-    
-    @Autowired    
+
+    @Autowired
     private EspecialidadService especialidadService;
-    
-     @GetMapping
+
+    @GetMapping
     public ResponseEntity<List<Especialidad>> getAllEspecialidad() {
         List<Especialidad> especialidades = especialidadService.findAll();
         return new ResponseEntity<>(especialidades, HttpStatus.OK);
@@ -49,6 +50,7 @@ public class EspecialidadController {
 
     // Crear una nueva categoría
     @PostMapping
+    @ResponseBody
     public ResponseEntity<Especialidad> createEspecialidad(@RequestBody Especialidad especialidad) {
         Especialidad newEspecialidad = especialidadService.save(especialidad);
         return new ResponseEntity<>(newEspecialidad, HttpStatus.CREATED);
@@ -59,7 +61,7 @@ public class EspecialidadController {
     public ResponseEntity<Especialidad> updateEspecialidad(@PathVariable Integer id, @RequestBody Especialidad especialidad) {
         Especialidad existingEspecialidad = especialidadService.findById(id);
         if (existingEspecialidad != null) {
-            especialidad.setIdEspecialidad(id); // Asegura que se actualice la categoría correcta
+            existingEspecialidad.setIdEspecialidad(id); // Asegura que se actualice la categoría correcta
             Especialidad updatedEspecialidad = especialidadService.save(especialidad);
             return new ResponseEntity<>(updatedEspecialidad, HttpStatus.OK);
         } else {

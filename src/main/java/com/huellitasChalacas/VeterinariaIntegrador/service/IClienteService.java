@@ -4,7 +4,6 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.service;
 
-import com.huellitasChalacas.VeterinariaIntegrador.dto.ClienteDTO;
 import com.huellitasChalacas.VeterinariaIntegrador.model.Cliente;
 import java.util.List;
 
@@ -13,9 +12,9 @@ import java.util.List;
  * @author jtorr
  */
 public interface IClienteService {
-    List<ClienteDTO> findAll();
+    List<Cliente> findAll();
     Cliente findById(Integer id);
     Cliente save(Cliente cliente);
     void deleteById(Integer id);
-    List<ClienteDTO> searchClientesByName(String nombre);
+    List<Cliente> searchClientesByName(String nombre);
 }

@@ -2,11 +2,15 @@ package com.huellitasChalacas.VeterinariaIntegrador.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "antecedentes_personales")
@@ -17,17 +21,15 @@ public class AntecedentesPersonales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAntecedente;
 
-//    @Column(name = "id_historia")
-//    private Integer idHistoria;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_historia", nullable = false)
-    private Historia historia;
-
     @Column(name = "tipo")
     private String tipo;
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    //CAMPOS RELACIONADOS
+    @ManyToOne
+    @JoinColumn(name = "id_historia", nullable = false)
+    private Historia historia;
 
 }

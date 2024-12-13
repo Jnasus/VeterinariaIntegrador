@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.huellitasChalacas.VeterinariaIntegrador.controller;
+package com.huellitasChalacas.VeterinariaIntegrador.adminController;
 
 import com.huellitasChalacas.VeterinariaIntegrador.dto.ClienteDTO;
 import com.huellitasChalacas.VeterinariaIntegrador.mapper.ClienteMapper;
@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jtorr
  */
 @RestController
-@RequestMapping("/api/v1/cliente")
-public class ClienteController {
+@RequestMapping("/api/v1/admin/cliente")
+public class ClienteAdminController {
 
     @Autowired
     private ClienteService clienteService;

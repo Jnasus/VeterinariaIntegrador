@@ -1,17 +1,20 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "citas")
@@ -22,30 +25,26 @@ public class Citas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCita;
 
-//    @Column(name = "id_veterinario")
-//    private Integer idVeterinario;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_veterinario")
-    @JsonBackReference //evita la serializacion infinita
-    private Veterinario veterinario;
-    
-     // Relación con Reserva
-    @OneToMany(mappedBy = "cita")
-    private List<Reserva> reservas;
+    @Column(name = "fecha")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate fecha;
 
-    //@Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-
-    //@Column(name = "hora")
-    @Temporal(TemporalType.TIME)
-    private Time hora;
+    @Column(name = "hora")
+    private LocalTime hora;
 
     @Column(name = "estado", nullable = false)
     private String estado;
 
     @Column(name = "observaciones")
     private String observaciones;
+
+    //CAMPOS RELACIONADOS
+    @ManyToOne
+    @JoinColumn(name = "id_veterinario")
+    private Veterinario veterinario;
+
+    // Relación con Reserva
+    @OneToMany(mappedBy = "cita")
+    private List<Reserva> reservas;
 
 }

@@ -4,21 +4,31 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.dto;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author jtorr
  */
-@Data
+
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoDocDTO implements Serializable{
-    
-    private Integer idTipoDoc;
+public class MascotaDTO {
+    private Integer idMascota;
     private String nombre;
-    
+    private String aPaterno;
+    private String aMaterno;
+    private LocalDate fechNacimiento;
+    private String sexo;
+    //DTOS ANIDADOS
+    private RazaDTO razaDTO;
+    private EspeciesDTO especieDTO;
 }

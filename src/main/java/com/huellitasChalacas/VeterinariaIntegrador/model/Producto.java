@@ -8,19 +8,17 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Producto extends Articulo {
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria", nullable = false)
-    @JsonBackReference // Evita serialización infinita
-    private CategoriaProducto categoria;
 
     @Column(name = "precio_costo", nullable = false)
     private BigDecimal precioCosto;
@@ -28,7 +26,9 @@ public class Producto extends Articulo {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaRegistro;
+    //CAMPOS RELACIONADOS
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private CategoriaProducto categoria;
 
 }

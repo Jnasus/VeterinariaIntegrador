@@ -4,12 +4,18 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED) // Utilizando una tabla separada para cada clase hijaS
@@ -29,9 +35,26 @@ public class Articulo {
 
     @Column(name = "descripcion")
     private String descripcion;
-    
-    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL )
+
+    //CAMPOS DE AUDITORIA
+    @Column(columnDefinition = "TIMESTAMP(3)", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @Column(columnDefinition = "TIMESTAMP(3)")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+    //CAMPOS RELACIONADOS
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL)
     private List<FacturaDetalle> facturaDetalle;
-    
-    
+
 }

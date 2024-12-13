@@ -5,15 +5,22 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "mascota")
 public class Mascota {
 
     @Id
@@ -30,27 +37,42 @@ public class Mascota {
     @Column
     private String aMaterno;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Column
+    private LocalDate fechNacimiento;
+
+    @Column(name = "sexo")
+    private String sexo;
+
+    //CAMPOS DE AUDITORIA
+    @Column(columnDefinition = "TIMESTAMP(3)", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @Column(columnDefinition = "TIMESTAMP(3)")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+    //CAMPOS RELACIONADOS
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_Cliente")
-    @JsonIgnore
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especie")
-    @JsonIgnore
     private Especies especie;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_raza")
-    @JsonIgnore
     private Raza raza;
-
-    //@Column(name = "fech_nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechNacimiento;
-
-    @Column(name = "sexo")
-    private String sexo;
 
     @OneToOne(mappedBy = "mascota", cascade = CascadeType.ALL)
     private Historia historia;

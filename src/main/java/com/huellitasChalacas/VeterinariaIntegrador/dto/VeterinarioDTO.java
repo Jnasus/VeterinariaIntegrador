@@ -21,7 +21,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteDTO implements Serializable {
+public class VeterinarioDTO implements Serializable {
 
     private Integer idPersona;
     private String nombres;
@@ -33,6 +33,9 @@ public class ClienteDTO implements Serializable {
     private String celular;
     private String correo;
     private String docId;
+    private String cmvp;
     //DTOS ANIDADOS
     private TipoDocDTO tipoDocDTO; // Para almacenar el nombre del tipo de documento
+    private EspecialidadDTO especialidadDTO;
+
 }

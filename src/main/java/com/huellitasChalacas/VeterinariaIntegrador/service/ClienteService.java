@@ -23,10 +23,9 @@ public class ClienteService implements IClienteService {
     private ClienteRepository clienteRepository;
 
     @Override
-    public List<ClienteDTO> findAll() {
+    public List<Cliente> findAll() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        List<Cliente> clientes = clienteRepository.findAll();
-        return clientes.stream().map(this::convertirAClienteDTO).collect(Collectors.toList());
+        return clienteRepository.findAll();  // Retorna una lista de entidades Cliente
     }
 
     @Override
@@ -47,30 +46,11 @@ public class ClienteService implements IClienteService {
         clienteRepository.deleteById(id);
     }
 
-    // Método para convertir Cliente a ClienteDTO
-    public ClienteDTO convertirAClienteDTO(Cliente cliente) {
-        String nombreTipoDoc = cliente.getTipoDoc() != null ? cliente.getTipoDoc().getNombre() : null;
-
-        return new ClienteDTO(
-                cliente.getIdPersona(),
-                cliente.getNombres(),
-                cliente.getAPaterno(),
-                cliente.getAMaterno(),
-                cliente.getSexo(),
-                cliente.getFechNacimiento(),
-                cliente.getDireccion(),
-                cliente.getCelular(),
-                cliente.getCorreo(),
-                cliente.getDocId(),
-                nombreTipoDoc
-        );
-    }
-
     @Override
-    public List<ClienteDTO> searchClientesByName(String nombre) {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        List<Cliente> clientes = clienteRepository.findByNombresContainingIgnoreCase(nombre);
-        return clientes.stream().map(this::convertirAClienteDTO).collect(Collectors.toList());
+    public List<Cliente> searchClientesByName(String nombre) {
+    return clienteRepository.findByNombresContainingIgnoreCase(nombre);
     }
+
+
 
 }

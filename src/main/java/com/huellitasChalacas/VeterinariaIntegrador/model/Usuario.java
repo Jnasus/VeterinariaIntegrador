@@ -1,12 +1,15 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,19 +21,20 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_persona", nullable = false)
-    private Persona persona;
-
     @Column(name = "usuario", nullable = false)
     private String usuario;
 
     @Column(name = "password", nullable = false)
     private String password;
+    
+    //CAMPOS RELACIONADOS
 
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
-    //@JsonBackReference //evita serializacion infinita
     private Roles rol;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_persona", nullable = false)
+    private Persona persona;
 
 }
