@@ -30,7 +30,7 @@ public interface VeterinarioMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "usuarios", ignore = true)
     @Mapping(target = "citas", ignore = true)
-    Veterinario toEntity(VeterinarioDTO veterina);
+    Veterinario toEntity(VeterinarioDTO veterinarioDTO);
 
     // Método para mapear listas de Veterinario a listas de VeterinarioDTO 
     @IterableMapping(elementTargetType = VeterinarioDTO.class)

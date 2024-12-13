@@ -4,8 +4,8 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.mapper;
 
-import com.huellitasChalacas.VeterinariaIntegrador.dto.RazaDTO;
-import com.huellitasChalacas.VeterinariaIntegrador.model.Raza;
+import com.huellitasChalacas.VeterinariaIntegrador.dto.EspeciesDTO;
+import com.huellitasChalacas.VeterinariaIntegrador.model.Especies;
 import java.util.List;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
@@ -16,18 +16,18 @@ import org.mapstruct.Mapping;
  * @author jtorr
  */
 @Mapper(componentModel = "spring")
-public interface RazaMapper {
+public interface EspeciesMapper {
 
-    // Mapeo de Raza a RazaDTO
-    RazaDTO toDTO(Raza raza);
+    // Mapeo de Especies a EspeciesDTO
+    EspeciesDTO toDTO(Especies especies);
 
-    // Mapeo de RazaDTO  a Raza
+    // Mapeo de EspeciesDTO  a Especies
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "mascotas", ignore = true)
-    Raza toEntity(RazaDTO razaDTO);
+    Especies toEntity(EspeciesDTO especiesDTO);
 
-    // Método para mapear listas de Raza a listas de RazaDTO
-    @IterableMapping(elementTargetType = RazaDTO.class)
-    List<RazaDTO> toDtoList(List<Raza> razas);
+    // Método para mapear listas de Especies a listas de EspeciesDTO
+    @IterableMapping(elementTargetType = EspeciesDTO.class)
+    List<EspeciesDTO> toDtoList(List<Especies> especies);
 }
