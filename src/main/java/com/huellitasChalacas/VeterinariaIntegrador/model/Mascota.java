@@ -63,15 +63,15 @@ public class Mascota {
 
     //CAMPOS RELACIONADOS
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_Cliente")
+    @JoinColumn(name = "id_Cliente", nullable = false)
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_especie")
+    @JoinColumn(name = "id_especie", nullable = false)
     private Especies especie;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_raza")
+    @JoinColumn(name = "id_raza", nullable = false)
     private Raza raza;
 
     @OneToOne(mappedBy = "mascota", cascade = CascadeType.ALL)

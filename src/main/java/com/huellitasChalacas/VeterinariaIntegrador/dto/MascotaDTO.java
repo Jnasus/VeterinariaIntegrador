@@ -31,4 +31,5 @@ public class MascotaDTO {
     //DTOS ANIDADOS
     private RazaDTO razaDTO;
     private EspeciesDTO especieDTO;
+    private ClienteDTO clienteDTO;
 }

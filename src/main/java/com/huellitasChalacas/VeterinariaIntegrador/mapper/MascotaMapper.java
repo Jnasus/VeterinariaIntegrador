@@ -15,20 +15,22 @@ import org.mapstruct.Mapping;
  *
  * @author jtorr
  */
-@Mapper(componentModel = "spring", uses = {RazaMapper.class, EspeciesMapper.class})
+@Mapper(componentModel = "spring", uses = {RazaMapper.class, EspeciesMapper.class,ClienteMapper.class})
 public interface MascotaMapper {
 
     // Mapeo de Mascota a MascotaDTO
     @Mapping(target = "razaDTO", source = "raza")
     @Mapping(target = "especieDTO", source = "especie")
+    @Mapping(target = "clienteDTO", source = "cliente")
     MascotaDTO toDTO(Mascota mascota);
 
     // Mapeo de MascotaDTO  a Mascota
     @Mapping(target = "raza", source = "razaDTO")
     @Mapping(target = "especie", source = "especieDTO")
+    @Mapping(target = "cliente", source = "clienteDTO")
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "cliente", ignore = true)
+    //@Mapping(target = "cliente", ignore = true)
     @Mapping(target = "historia", ignore = true)
     @Mapping(target = "reservas", ignore = true)
     Mascota toEntity(MascotaDTO mascotaDTO);
