@@ -31,6 +31,6 @@ public interface ReservaMapper {
     Reserva toEntity(ReservaDTO reservaDTO);
 
     @IterableMapping(elementTargetType = ReservaDTO.class)
-    List<ReservaDTO> toListDto(List<Reserva> reservas);
+    List<ReservaDTO> toDtoList(List<Reserva> reservas);
 
 }

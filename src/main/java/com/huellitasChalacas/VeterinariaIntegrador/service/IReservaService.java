@@ -6,7 +6,6 @@ package com.huellitasChalacas.VeterinariaIntegrador.service;
 
 import com.huellitasChalacas.VeterinariaIntegrador.model.Reserva;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
@@ -16,7 +15,7 @@ public interface IReservaService {
 
     List<Reserva> listarReservas();
 
-    Optional<Reserva> obtenerReservaPorId(Integer id);
+    Reserva obtenerReservaPorId(Integer id);
 
     Reserva guardarReserva(Reserva reserva);
 

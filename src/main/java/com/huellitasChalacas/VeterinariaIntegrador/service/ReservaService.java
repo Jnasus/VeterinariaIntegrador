@@ -34,9 +34,9 @@ public class ReservaService implements IReservaService {
     }
 
     @Override
-    public Optional<Reserva> obtenerReservaPorId(Integer id) {
+    public Reserva obtenerReservaPorId(Integer id) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return reservaRepository.findById(id);
+        return reservaRepository.findById(id).orElse(null);
     }
 
     @Override
