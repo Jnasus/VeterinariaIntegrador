@@ -1,6 +1,5 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,6 +43,5 @@ public class TipoServicio {
     }
     //CAMPOS RELACIONADOS
     @OneToMany(mappedBy = "tipoServicio")
-    @JsonManagedReference // Mantiene la referencia en serialización
     private List<Servicio> servicios;
 }

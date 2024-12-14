@@ -6,6 +6,11 @@ package com.huellitasChalacas.VeterinariaIntegrador.adminController;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.huellitasChalacas.VeterinariaIntegrador.dto.RazaDTO;
+import com.huellitasChalacas.VeterinariaIntegrador.model.Raza;
+import com.huellitasChalacas.VeterinariaIntegrador.mapper.RazaMapper;
+import com.huellitasChalacas.VeterinariaIntegrador.service.RazaService;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import com.huellitasChalacas.VeterinariaIntegrador.dto.RazaDTO;
-import com.huellitasChalacas.VeterinariaIntegrador.model.Raza;
-import com.huellitasChalacas.VeterinariaIntegrador.service.IRazaService;
-import com.huellitasChalacas.VeterinariaIntegrador.mapper.RazaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ import org.springframework.http.ResponseEntity;
 public class RazaAdminController {
 
     @Autowired
-    private IRazaService razaService;
+    private RazaService razaService;
 
     @Autowired
     private RazaMapper razaMapper;
