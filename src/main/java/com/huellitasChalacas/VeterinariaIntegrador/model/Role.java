@@ -1,9 +1,8 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "roles")
-public class Roles {
+public class Role {
 
     @Id
     @Column(name = "id_rol", nullable = false)
@@ -26,7 +25,10 @@ public class Roles {
     @Column(name = "nombre", nullable = false)
     private String nombre;
     
-    @OneToMany(mappedBy = "rol")
-    private List<Usuario> usuarios;
+    // Relación ManyToMany inversa
+    @ManyToMany(mappedBy = "roles")
+    private Set<Usuario> usuarios; // Usamos Set en lugar de List para mantener la unicidad de los usuarios
+
+    
 
 }

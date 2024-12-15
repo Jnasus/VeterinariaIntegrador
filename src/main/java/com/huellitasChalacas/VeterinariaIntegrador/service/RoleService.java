@@ -4,44 +4,50 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.service;
 
-import com.huellitasChalacas.VeterinariaIntegrador.model.Roles;
-import com.huellitasChalacas.VeterinariaIntegrador.repository.RolesRepository;
+import com.huellitasChalacas.VeterinariaIntegrador.model.Role;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.huellitasChalacas.VeterinariaIntegrador.repository.RoleRepository;
 
 /**
  *
  * @author jtorr
  */
 @Service
-public class RolesService implements IRolesService {
+public class RoleService implements IRoleService {
 
     @Autowired
-    private RolesRepository rolRepository;
+    private RoleRepository roleRepository;
 
     @Override
-    public List<Roles> findAll() {
+    public List<Role> findAll() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return rolRepository.findAll();
+        return roleRepository.findAll();
     }
 
     @Override
-    public Roles findById(Integer id) {
+    public Role findById(Integer id) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return rolRepository.findById(id).orElse(null);
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Roles save(Roles rol) {
+    public Role save(Role rol) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return rolRepository.save(rol);
+        return roleRepository.save(rol);
     }
 
     @Override
     public void deleteById(Integer id) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        rolRepository.deleteById(id);
+        roleRepository.deleteById(id);
+    }
+
+    @Override
+    public Role findByNombre(String nombre) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return roleRepository.findByNombre(nombre).orElse(null);
     }
 
 }

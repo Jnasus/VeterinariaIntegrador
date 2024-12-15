@@ -20,4 +20,6 @@ public interface IUsuarioService {
     Usuario save(Usuario usuario);
 
     void deleteById(Integer id);
+
+    Usuario findByUsername(String username);
 }

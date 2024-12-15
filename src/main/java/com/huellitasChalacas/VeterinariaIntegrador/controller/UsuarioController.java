@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/usuario")
 public class UsuarioController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         List<Usuario> usuario = usuarioService.findAll();
@@ -45,6 +45,13 @@ public class UsuarioController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    // Obtener una usuario por Username
+    @GetMapping("/username/{username}")
+    public ResponseEntity<Usuario> getUserByUsername(@PathVariable String username) {
+        Usuario usuario = usuarioService.findByUsername(username);
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
     // Crear una nueva categoría

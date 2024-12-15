@@ -5,20 +5,22 @@
 package com.huellitasChalacas.VeterinariaIntegrador.service;
 
 import java.util.List;
-import com.huellitasChalacas.VeterinariaIntegrador.model.Roles;
+import com.huellitasChalacas.VeterinariaIntegrador.model.Role;
 
 /**
  *
  * @author jtorr
  */
-public interface IRolesService {
+public interface IRoleService {
 
-    List<Roles> findAll();
+    List<Role> findAll();
 
-    Roles findById(Integer id);
+    Role findById(Integer id);
 
-    Roles save(Roles rol);
+    Role save(Role rol);
 
     void deleteById(Integer id);
+    
+    Role findByNombre(String nombre);
 
 }

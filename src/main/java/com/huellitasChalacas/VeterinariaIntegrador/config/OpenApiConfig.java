@@ -37,10 +37,10 @@ public class OpenApiConfig {
 
     // Agrupación de APIs (si tienes múltiples grupos)
     @Bean
-    public GroupedOpenApi publicApi() {
+    public GroupedOpenApi adminApi() {
         return GroupedOpenApi.builder()
-                .group("Public")
-                .packagesToScan("com.huellitasChalacas.VeterinariaIntegrador.controller")
+                .group("Admin")
+                .packagesToScan("com.huellitasChalacas.VeterinariaIntegrador.adminController")
                 .build();
     }
 
@@ -48,7 +48,7 @@ public class OpenApiConfig {
     public GroupedOpenApi privateApi() {
         return GroupedOpenApi.builder()
                 .group("Private")
-                .packagesToScan("com.huellitasChalacas.VeterinariaIntegrador.adminController")
+                .packagesToScan("com.huellitasChalacas.VeterinariaIntegrador.controller")
                 .build();
     }
     // Puedes agregar más grupos según tus necesidades

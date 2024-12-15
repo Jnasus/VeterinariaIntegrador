@@ -4,8 +4,8 @@
  */
 package com.huellitasChalacas.VeterinariaIntegrador.controller;
 
-import com.huellitasChalacas.VeterinariaIntegrador.model.Roles;
-import com.huellitasChalacas.VeterinariaIntegrador.service.RolesService;
+import com.huellitasChalacas.VeterinariaIntegrador.model.Role;
+import com.huellitasChalacas.VeterinariaIntegrador.service.RoleService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,24 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jtorr
  */
 @RestController
-@RequestMapping("/api/v1/roles")
+@RequestMapping("/api/v1/role")
 
-public class RolesController {
+public class RoleController {
 
     @Autowired
-    private RolesService rolesService;
-    
+    private RoleService roleService;
+
     // Obtener todas las categorías
     @GetMapping
-    public ResponseEntity<List<Roles>> getAllRoles() {
-        List<Roles> roles = rolesService.findAll();
+    public ResponseEntity<List<Role>> getAllRoles() {
+        List<Role> roles = roleService.findAll();
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
     // Obtener una categoría por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Roles> getRolesById(@PathVariable Integer id) {
-        Roles roles = rolesService.findById(id);
+    public ResponseEntity<Role> getRolesById(@PathVariable Integer id) {
+        Role roles = roleService.findById(id);
         if (roles != null) {
             return new ResponseEntity<>(roles, HttpStatus.OK);
         } else {
@@ -49,20 +49,27 @@ public class RolesController {
         }
     }
 
+    // Obtener una usuario por Username
+    @GetMapping("/role/{nombre}")
+    public ResponseEntity<Role> getRoleByNombre(@PathVariable String nombre) {
+        Role role = roleService.findByNombre(nombre);
+        return new ResponseEntity<>(role, HttpStatus.OK);
+    }
+
     // Crear una nueva categoría
     @PostMapping
-    public ResponseEntity<Roles> createRoles(@RequestBody Roles roles) {
-        Roles newRoles = rolesService.save(roles);
+    public ResponseEntity<Role> createRoles(@RequestBody Role roles) {
+        Role newRoles = roleService.save(roles);
         return new ResponseEntity<>(newRoles, HttpStatus.CREATED);
     }
 
     // Actualizar una categoría existente
     @PutMapping("/{id}")
-    public ResponseEntity<Roles> updateRoles(@PathVariable Integer id, @RequestBody Roles roles) {
-        Roles existingRoles = rolesService.findById(id);
+    public ResponseEntity<Role> updateRoles(@PathVariable Integer id, @RequestBody Role roles) {
+        Role existingRoles = roleService.findById(id);
         if (existingRoles != null) {
             roles.setIdRol(id); // Asegura que se actualice la categoría correcta
-            Roles updatedRoles = rolesService.save(roles);
+            Role updatedRoles = roleService.save(roles);
             return new ResponseEntity<>(updatedRoles, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -72,9 +79,9 @@ public class RolesController {
     // Eliminar una categoría por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRoles(@PathVariable Integer id) {
-        Roles existingRoles = rolesService.findById(id);
+        Role existingRoles = roleService.findById(id);
         if (existingRoles != null) {
-            rolesService.deleteById(id);
+            roleService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

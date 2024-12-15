@@ -1,5 +1,7 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.huellitasChalacas.VeterinariaIntegrador.util.LocalTimeDeserializer;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,6 +32,7 @@ public class Citas {
     private LocalDate fecha;
 
     @Column(name = "hora")
+    @JsonDeserialize(using = LocalTimeDeserializer.class)  // Aquí se agrega el deserializador personalizado
     private LocalTime hora;
 
     @Column(name = "estado", nullable = false)
@@ -40,7 +43,7 @@ public class Citas {
 
     //CAMPOS RELACIONADOS
     @ManyToOne
-    @JoinColumn(name = "id_veterinario")
+    @JoinColumn(name = "id_veterinario", nullable = false)
     private Veterinario veterinario;
 
     // Relación con Reserva

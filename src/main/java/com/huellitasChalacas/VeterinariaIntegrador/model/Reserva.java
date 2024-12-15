@@ -1,14 +1,12 @@
 package com.huellitasChalacas.VeterinariaIntegrador.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Getter
@@ -49,7 +47,7 @@ public class Reserva {
     @JoinColumn(name = "id_cita")
     private Citas cita;
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = false)
+    @JoinColumn(name = "id_mascota")
     private Mascota mascota;
     @ManyToOne
     @JoinColumn(name = "id_servicio")
