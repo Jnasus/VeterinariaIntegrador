@@ -1,30 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
 <configuration>
 
-    <!-- Appender for logging within the console -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- Definir propiedades para patrones y directorios -->
+    <property name="LOG_DIR" value="logs"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_FILE" value="${LOG_DIR}/veterinaria.log"/>
+    <property name="LOG_ERROR_FILE" value="${LOG_DIR}/veterinaria-error.log"/>
+
+    <!-- Appender para la consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!-- Pattern of the console logging -->
-
-            <!-- %d - Date and time -->
-            <!-- %thread - Thread name -->
-            <!-- %level - Log level (%p also works) -->
-            <!-- %logger - Logger name -->
-            <!-- %msg - Log message (%m also works) -->
-            <!-- %n - Line separator -->
-
-            <!-- %d{yyyy-MMM-dd HH:mm:ss} - Custom Date/Time format -->
-            <!-- %-5level - Left justification flag - Use spaces for right padding if characters < 5 -->
-            <!-- %logger{36} - Abbreviate -->
-
-            <!-- [Date and time] [Thread] LoggingLevel : LoggerName - Logging message -->
-            <pattern>[%thread] %-5level: %logger - %msg%n</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <!-- Logging levels are, in order of precedence -> TRACE, DEBUG, INFO, WARN and ERROR -->
-    <root level="info">
-        <appender-ref ref="STDOUT"/>
+    <!-- Appender para archivos con rotación basada en tiempo -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Archivo de respaldo con fecha en el nombre, rotar diariamente -->
+            <fileNamePattern>${LOG_DIR}/veterinaria.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Mantener logs por 30 días -->
+            <maxHistory>30</maxHistory>
+            <!-- Comprimir archivos antiguos -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para solo errores, con rotación -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_ERROR_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/veterinaria-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+<!--     Appender para enviar logs a Logstash (usando el formato JSON) 
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+         Dirección de Logstash (puede ser localhost o una IP remota) 
+        <remoteHost>localhost</remoteHost>
+        <port>5044</port>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                 Incluye timestamp, nivel de log, mensaje, y otros detalles 
+                <provider class="net.logstash.logback.encoder.org.apache.logging.log4j.message.MessageProvider"/>
+                <provider class="net.logstash.logback.encoder.org.apache.logging.log4j.message.LoggerNameProvider"/>
+                <provider class="net.logstash.logback.encoder.org.apache.logging.log4j.message.ThreadNameProvider"/>
+                <provider class="net.logstash.logback.encoder.org.apache.logging.log4j.message.TimestampProvider"/>
+            </providers>
+        </encoder>
+    </appender>-->
+
+    <!-- Configuración de loggers específicos -->
+    <logger name="com.huellitasChalacas.VeterinariaIntegrador" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.hibernate" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
     </root>
 
 </configuration>
